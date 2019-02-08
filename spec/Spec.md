@@ -1,3 +1,5 @@
 # Expense Claims System
 
-![Register and Verify](/spec/register-verify.png)
+![Register and verify users](/spec/register-verify.png)
+
+![Make and authorise claims](/spec/make-authorise-claim.png)
