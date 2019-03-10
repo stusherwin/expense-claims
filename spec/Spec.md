@@ -4,7 +4,7 @@
 
 Catalyst would like a web application to help manage the process of claiming expenses for Radical Routes working groups. Currently this is a cumbersome and time-consuming process and existing applications do not support the granularity of permissions around co-ops and working groups that the Radical Routes expense claim process requires.
 
-Working group members should be able to register for an account with the expense claims system, and after their registration has been approved by Catalyst, should be able to use the system to make expense claims against their working group, including uploading any reciepts or supporting documents.
+Working group members should be able to register for an account with the expense claims system, and after their registration has been approved by Catalyst, should be able to use the system to make expense claims against their working group, including uploading any receipts or supporting documents.
 
 As soon as an expense claim against a working group has been submitted, core members of the working group will be notified by email and will be able to view and authorise the claim. Core members of the working group should also be able to comment on the claim prior to authorisation and the claimant should be notified by email of any comments. Only core members of the working group who are not the claimant or members of the same co-op as the claimant should be allowed to authorise a claim.
 
@@ -40,7 +40,7 @@ Once approved, the new user will be sent an email, with a link which will allow 
 
 ### Notes/Questions
 
-1. If the user doesn't verify their email address, Catalyst will never be notifed that they have registered. The system should send the user a reminder email if they haven't verified after a period of time
+1. If the user doesn't verify their email address, Catalyst will never be notified that they have registered. The system should send the user a reminder email if they haven't verified after a period of time
 2. What happens if Catalyst doesn't approve a user registration? Should there be a way to inform the user that they need to change their details before they can be approved?
 3. Users will need to be added and removed from co-ops and working groups after their initial registration. Should a user be able to update their own co-op and working group membership or should only Catalyst be able to do this? If the user is allowed to do this then presumably Catalyst would also need to approve these changes before they take effect.
 4. Users should be able to change their name, email address and bank details, presumably Catalyst would not need to approve these changes.
@@ -204,7 +204,7 @@ If the core membership of a working group is changed this will immediately affec
 
 ## Timings and costs
 ### Development stages
-Some features are more important than others so minimise the amount of time until the system is useable, the features will be developed in order of importance.
+Some features are more important than others so minimise the amount of time until the system is usable, the features will be developed in order of importance.
 
 Tasks in each stage are estimated in days, and then costs per day are calculated as 7 hours per day using the living wage of £9.00/hour.
 
