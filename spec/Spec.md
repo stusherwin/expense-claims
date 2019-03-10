@@ -106,14 +106,14 @@ When they mark it as processed, all parties will be notified by email that this 
 * A user will not be able to authorise their own claim, even if they are a core member of that working group
 * A user will not be able to authorise the claim of another member of the same co-op, even if they are a core member of the working group
 * Catalyst members will be able to make claims, and authorise them as long as the above restrictions also apply
-* Catalyst members will however be able to mark as processed their own claims or claims of other members of the same co-op. This is because marking a claim as processed is just an administrative activity.
+* Catalyst members will however be able to process their own claims or claims of other members of the same co-op. This is because processing a claim is just an administrative activity.
 
 ### Notes/Questions
 
 1. Proposed file system structure for uploaded documents: `Expense claims/{working group}/{claim id}-{date}-{member name}/{document id}-{document name}.{extension}`
 1. Any changes the user makes to the uploaded documents should be reflected in the documents on the server (i.e. if a document is deleted in the app it should be deleted on the server etc.)
 1. Should all members of a working group receive an email notification when a new claim is submitted, or just core members?
-1. The system should work out what a user is allowed to do, and only present those actions to the user. For example if a Catalyst member logs in and views a claim from a working group they are a core member of, they should be able to authorise it, and then immediately mark it as processed.
+1. The system should work out what a user is allowed to do, and only present those actions to the user. For example if a Catalyst member logs in and views a claim from a working group they are a core member of, they should be able to authorise it, and then immediately process it.
 1. The system should send reminder emails at periodic intervals to the relevant parties if a claim is still awaiting authorisation or processing.
 
 ## Closing an expense claim
@@ -192,10 +192,44 @@ If the core membership of a working group is changed this will immediately affec
 
 ![Create_edit working group (Catalyst only)](/spec/mockups/20%20Create_edit%20working%20group%20(Catalyst%20only).png)
 
-## Estimates
-|Task|Time|
-|-|-|
-|Initial setup|? days|
-|User registration|? days|
+## Timings and costs
+### Development stages
+Some features are more important than others so minimise the amount of time until the system is useable, the features will be developed in order of importance.
 
-### Total: ? days
+Tasks in each stage are estimated in days, and then costs per day are calculated as 7 hours per day using the living wage of £9.00/hour.
+
+|Task|Time|Cost|
+|-|-|-|
+|**Stage 1**|||
+|Initial setup|2 days|£126|
+|Database design|2 days|£126|
+|User registration|2 days|£126|
+|Making/revising a claim|2 days|£126|
+|Authorisation of a claim (working group core member)|1 day|£63|
+|Processing a claim (Catalyst)|1 day|£63|
+|Email notifications|1 day|£63|
+|**Stage 1 total**|**11 days**|**£693**|
+|&nbsp;|||
+|**Stage 2**|||
+|User authentication and login session management|2 days|£126|
+|User email verification|1 day|£63|
+|User registration approval (Catalyst)|1 day|£63|
+|User home screen|2 days|£126|
+|**Stage 2 total**|**6 days**|**£378**|
+|&nbsp;|||
+|**Stage 3**||
+|Linking of itemised expenses with supporting documents|1 day|£63|
+|Messaging between users from within expense claim screen|1 day|£63|
+|Closing a claim|1 day|£63|
+|Bank account validation|2 days|£126|
+|**Stage 3 total**|**5 days**|**£315**|
+|&nbsp;|||
+|**Stage 4**|||
+|Creating/editing users (Catalyst)|2 days|£126|
+|Creating/editing co-ops (Catalyst)|2 days|£126|
+|Creating/editing working groups (Catalyst)|2 days|£126|
+|View all claims, edit unauthorised claims (Catalyst)|2 days|£126|
+|Archive users, co-ops and working groups (Catalyst)|2 days|£126|
+|**Stage 4 total**|**10 days**|**£630**|
+|&nbsp;|||
+|**Grand total**|**32 days**|**£2016**|
