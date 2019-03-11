@@ -42,10 +42,11 @@ Once approved, the new user will be sent an email, with a link which will allow 
 
 1. If the user doesn't verify their email address, Catalyst will never be notified that they have registered. The system should send the user a reminder email if they haven't verified after a period of time
 2. What happens if Catalyst doesn't approve a user registration? Should there be a way to inform the user that they need to change their details before they can be approved?
-3. Users will need to be added and removed from co-ops and working groups after their initial registration. Should a user be able to update their own co-op and working group membership or should only Catalyst be able to do this? If the user is allowed to do this then presumably Catalyst would also need to approve these changes before they take effect.
-4. Users should be able to change their name, email address and bank details, presumably Catalyst would not need to approve these changes.
-5. If a user changes their email address they will need to go through the process of verifying their new email address
-6. Bank account details are easy to mis-type, there should probably be some validation on these fields to confirm the account numbers. This is usually done by calculating a checksum in the account number/sort code, but this may be time-consuming to implement or require some third party plugin.
+3. If Catalyst decide not to approve a user registration, there should be a way to delete it so that it doesn't appear in the list of pending registrations, and the system stops sending out reminder emails
+4. Users will need to be added and removed from co-ops and working groups after their initial registration. Should a user be able to update their own co-op and working group membership or should only Catalyst be able to do this? If the user is allowed to do this then presumably Catalyst would also need to approve these changes before they take effect.
+5. Users should be able to change their name, email address and bank details, presumably Catalyst would not need to approve these changes.
+6. If a user changes their email address they will need to go through the process of verifying their new email address
+7. Bank account details are easy to mis-type, there should probably be some validation on these fields to confirm the account numbers. This is usually done by calculating a checksum in the account number/sort code, but this may be time-consuming to implement or require some third party plugin.
 
 ## User login
 So many web applications require users to create a username and password that they have to remember. This just leads to users either 
@@ -53,7 +54,7 @@ So many web applications require users to create a username and password that th
   * forgetting their passwords and having to use the 'Forgotten password' feature, which resets their password via email, or 
   * using the same password for every application, which is insecure.
 
-An alternative is to email itself as the authentication for the expense claims system. This is no less secure than the 'forgotten password' feature of most websites, which effectively uses the user's email address as the means of authentication.
+An alternative is to use email itself as the authentication for the expense claims system. This is no less secure than the 'forgotten password' feature of most websites, which effectively uses the user's email address as the means of authentication.
 
 Every time the user wants to use the system, they request a login link which is emailed to them. Once the user clicks this link they will be able to access the system for a period of time, after which their session will expire and they will have to request a new login link. There are several reasons for why this method is a good fit for this app:
 
@@ -71,7 +72,7 @@ When they click on the link in the email, they will be automatically logged in a
 
 ### Notes/Questions
 * The length of a session needs to be decided - the length of time a user can access the system without having to log in again. One day (24 hours) seems reasonable, although this could be extended if a longer period of time makes more sense.
-* The links that are emailed to users should themselves have an expiry period.
+* Should the links that are emailed to users themselves have an expiry period? I can't think of a reason why they would need to expire but leaving this here just in case we think of one.
 
 ## Making and authorising expense claims
 The following diagram gives an overview of the different user interactions involved in making and authorising expense claims:
@@ -116,15 +117,16 @@ When they mark it as processed, all parties will be notified by email that this 
 * A user will not be able to authorise their own claim, even if they are a core member of that working group
 * A user will not be able to authorise the claim of another member of the same co-op, even if they are a core member of the working group
 * Catalyst members will be able to make claims, and authorise them as long as the above restrictions also apply
-* Catalyst members will however be able to process their own claims or claims of other members of the same co-op. This is because processing a claim is just an administrative activity.
+* Catalyst members will be able to process their own claims or claims of other members of the same co-op. This is because processing a claim is just an administrative activity of Catalyst and doesn't need authorising by someone else.
 
 ### Notes/Questions
 
 1. Proposed file system structure for uploaded documents: `Expense claims/{working group}/{claim id}-{date}-{member name}/{document id}-{document name}.{extension}`
-1. Any changes the user makes to the uploaded documents should be reflected in the documents on the server (i.e. if a document is deleted in the app it should be deleted on the server etc.)
-1. Should all members of a working group receive an email notification when a new claim is submitted, or just core members?
-1. The system should work out what a user is allowed to do, and only present those actions to the user. For example if a Catalyst member logs in and views a claim from a working group they are a core member of, they should be able to authorise it, and then immediately process it.
-1. The system should send reminder emails at periodic intervals to the relevant parties if a claim is still awaiting authorisation or processing.
+2. Expense claim ids and document ids will just be incrementing numbers starting at `1` - unless Catalyst already have a numbering system that these should conform to?
+3. Any changes the user makes to the uploaded documents should be reflected in the documents on the server (i.e. if a document is deleted in the app it should be deleted on the server etc.)
+4. Should all members of a working group receive an email notification when a new claim is submitted, or just core members?
+5. The system should work out what a user is allowed to do, and only present those actions to the user. For example if a Catalyst member logs in and views a claim from a working group they are a core member of, they should be able to authorise it, and then immediately process it.
+6. The system should send reminder emails at periodic intervals to the relevant parties if a claim is still awaiting authorisation or processing.
 
 ## Closing an expense claim
 ![Closing a claim](/spec/close-claim.png)
@@ -186,6 +188,10 @@ Catalyst members will be able to create new co-ops and edit existing ones, inclu
 
 If the membership of a co-op is changed this will immediately affect whether those users will be able to authorise the claims of the other users in the co-op.
 
+If the membership of Catalyst itself is changed, this will immediately affect users ability to view areas of the system and perform actions limited to Catalyst members. Any new members of Catalyst will receive an email notification of any claims that are waiting to be processed.
+
+A user who is a member of Catalyst will not be able to remove themselves as a member by editing the Catalyst co-op entry! Otherwise they would be immediately logged out of the system and the universe will implode.
+
 ![Create_edit co-op (Catalyst only)](/spec/mockups/18%20Create_edit%20co-op%20(Catalyst%20only).png)
 
 ### Viewing all working groups
@@ -204,7 +210,7 @@ If the core membership of a working group is changed this will immediately affec
 
 ## Timings and costs
 ### Development stages
-Some features are more important than others so minimise the amount of time until the system is usable, the features will be developed in order of importance.
+Some features are more important than others so to minimise the amount of time until the system is usable, the features will be developed in order of importance.
 
 Tasks in each stage are estimated in days, and then costs per day are calculated as 7 hours per day using the living wage of £9.00/hour.
 
